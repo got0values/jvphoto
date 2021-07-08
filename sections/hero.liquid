@@ -1,6 +1,6 @@
 <section class="inner-hero-section">
     {% if section.settings.image != blank %}
-        <img src="{{ section.settings.image | img_url }}" alt="">
+        <img src="{{ section.settings.image | img_url: 'large' }}" alt="">
     {% else %}
         {% capture current %}{% cycle 1,2 %}{% endcapture %}
         {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
