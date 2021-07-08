@@ -1,4 +1,6 @@
-html, body {}
+html, body {
+    font-family: 'Roboto Condensed', sans-serif;
+}
 
 .inner-hero-section {
     position: relative;
