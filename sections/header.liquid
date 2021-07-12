@@ -1,6 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">JVPhoto</a>
+
+    {%- comment -%}Upload Header Image{%- endcomment -%}
+    <a class="navbar-brand" href="#">
+        {% if section.settings.header_image %}
+            <img src="{{ section.settings.header_image | img_url }}">
+        {% else %}
+            {{ section.settings.header_text }}
+        {% endif %}
+    </a>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -40,3 +50,23 @@
         {{ 'register' | customer_register_link }}
     {% endif %}
 {% endif %}
+
+{% schema %}
+    {
+        "name": "Header Area",
+        "class": "header-section",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "header_image",
+                "label": "HeaderImage"
+            },
+            {
+                "type": "text",
+                "id": "header_text",
+                "label": "HeaderText",
+                "default": "JVPhoto"
+            }
+        ]
+    }
+{% endschema %}
