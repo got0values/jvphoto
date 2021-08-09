@@ -3,7 +3,7 @@
     <div class="row">
         {% for product in collections[section.settings.featured_collection].products %}
             {% assign image = product.featured_media.preview_image %}
-            <div class="col">
+            <div class="col my-2">
                 <div class="card" style="width: 18rem;">
                     {% if image != blank %}
                         <img class="card-img-top" src="{{ image | img_url: 'medium' }}" alt="{{ product.title }}">

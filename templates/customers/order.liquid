@@ -1,32 +1,52 @@
 <!-- /templates/customers/order.liquid -->
-
-<h2>Billing Address</h2>
-<p><span>Payment Status:</span> <span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span></p>
-<p>{{ order.billing_address.name }}</p>
-<p>{{ order.billing_address.company }}</p>
-<p>{{ order.billing_address.street }}</p>
-<p>{{ order.billing_address.city }}, {{ order.billing_address.province }}</p>
-<p>{{ order.billing_address.country }} {{ order.billing_address.zip }}</p>
-<p>{{ order.billing_address.phone }}</p>
-
-<h2>Shipping Address</h2>
-<p><span>Fulfillment Status:</span><span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span></p>
-<p>{{ order.shipping_address.name }}</p>
-<p>{{ order.shipping_address.company }}</p>
-<p>{{ order.shipping_address.street }}</p>
-<p>{{ order.shipping_address.city }}, {{ order.shipping_address.province }}</p>
-<p>{{ order.shipping_address.country }} {{ order.shipping_address.zip }}</p>
-<p>{{ order.shipping_address.phone }}</p>
-
-<h2>Order Items</h2>
-<table>
-  {% for line_item in order.line_items %}
-  <tr>
-    <td>{{ line_item.title | link_to: line_item.product.url }}</td>
-    <td>{{ line_item.sku }}</td>
-    <td>{{ line_item.original_price | money }}</td>
-    <td>{{ line_item.quantity }}</td>
-    <td>{{ line_item.line_price | money }}</td>
-  </tr>
-  {% endfor %}
-</table>
+<div class="container my-5">
+  <h1 class="lead">Order {{order.name}}</h1>
+  <div class="row row-my5">
+    <div class="col-12 col-md-4">
+      <div class="card">
+        <div class="card-header">Billing Information</div>
+        <div class="card-body">
+          <p>Billing status: <span class="badge bg-success">{{ order.financial_status_label }}</span></p>
+          {{order.billing_address | format_address}}
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Shipping Information</div>
+        <div class="card-body">
+          <p>Fulfillment status: <span class="badge bg-success">{{ order.fulfillment_status_label }}</span></p>
+          {{order.shipping_address | format_address}}
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-8">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td>Product</td>
+            <td>SKU</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for line_item in order.line_items %}
+            <tr>
+              <td>{{line_item.title | link_to: line_item.product.url}}</td>
+              <td>{{line_item.sku}}</td>
+              <td>{{line_item.original_price | money}}</td>
+              <td>{{line_item.quantity}}</td>
+              <td>{{line_item.line_price | money}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">SUBTOTAL</td>
+            <td>{{order.line_items_subtotal_price | money}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,18 @@
     "404": {
       "title": "Not found",
       "subtext_html": "The page you were looking for does not exist"
+    },
+    "Cart": {
+      "title": "Cart"
+    },
+    "Blog": {
+      "title": "Blog"
+    },
+    "layout": {
+      "login_text": "Login",
+      "register_text": "Register",
+      "account_text": "User",
+      "logout_text": "Logout"
     }
   }
 }

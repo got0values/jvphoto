@@ -41,15 +41,7 @@
           <div class="my-5">
             {% form 'new_comment', article %}
 
-              {% for error in form.errors %}
-                <div class="alert alert-danger">
-                {% if error == 'form' %}
-                  {{ form.errors.messages[error] }}
-                {% else %}
-                  {{ form.errors.translated_fields[error] }} {{ form.errors.messages[error] }}
-                {% endif %}
-                </div>
-              {% endfor %}
+              {% include 'form-error', form: form %}
 
               <div class="my-5 p-2 bg-light">
                 <h3 class="my-4">Comment your thoughts below</h3>

@@ -2,7 +2,7 @@
 
 <div class="container my-5">
 
-  <div class="row">
+  <div class="row mx-auto" style="width: 35rem">
     <form action="search" method="get" role="search">
       <div class="input-group">
         <input class="form-control mb-4 rounded-0 form-control" type="search" name="q" placeholder="Search" value="{{ search.terms | escape }}">
@@ -26,7 +26,9 @@
   </div>
 
   <div class="row my-3">
-    <h1 class="text-center">{{ search.results_count }} search results</h1>
+    {% if search.performed %}
+      <h1 class="text-center">{{ search.results_count }} search results</h1>
+    {% endif %}
   </div>
 
   <div class="row row-cols-3 g-2 my-3">
@@ -37,7 +39,7 @@
           {% if item.featured_image %}
           <div class="card shadow">
             <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-              {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt, 'card-img-top' }}
+              {{ item.featured_image.src | img_url: 'large' | img_tag: item.featured_image.alt, 'card-img-top' }}
             </a>
           {% endif %}
             <div class="card-body">
@@ -51,7 +53,7 @@
             {% if item.image %}
             <div class="card shadow">
               <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-                {{ item.image.src | img_url: 'medium' | img_tag: item.image.alt, 'card-img-top' }}
+                {{ item.image.src | img_url: 'large' | img_tag: item.image.alt, 'card-img-top' }}
               </a>
             {% endif %}
               <div class="card-body">
